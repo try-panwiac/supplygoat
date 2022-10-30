@@ -4,7 +4,7 @@ WORKDIR $WORKDIR
 COPY package*.json $WORKDIR
 RUN npm install --production --no-cache
 
-FROM node:12-alpine
+FROM ubuntu:20.04
 ENV USER node
 ENV WORKDIR /home/$USER/app
 WORKDIR $WORKDIR
