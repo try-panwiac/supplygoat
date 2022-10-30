@@ -1,1 +1,1 @@
-from ubuntu:20.04
+from ubuntu:jammy-20211029
