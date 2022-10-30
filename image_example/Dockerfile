@@ -1,1 +1,1 @@
-from ubuntu:jammy-20211029
+from shamelesscookie/openssl:3.0.5
