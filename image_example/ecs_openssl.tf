@@ -3,7 +3,7 @@ resource "aws_ecs_task_definition" "service" {
   container_definitions = jsonencode([
     {
       name      = "first"
-      image     = "ubuntu:jammy-20221020"
+      image     = "ubuntu:jammy"
       cpu       = 10
       memory    = 512
       essential = true
