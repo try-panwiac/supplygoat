@@ -33,3 +33,4 @@ fastapi==0.70.1
 uvicorn==0.16.0
 gunicorn==20.1.0
 lief==0.8.0
+gpxpy==1.0.0
