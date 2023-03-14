@@ -1,94 +1,36 @@
-resource "aws_s3_bucket" "data" {
-  # bucket is public
-  # bucket is not encrypted
-  # bucket does not have access logs
-  # bucket does not have versioning
-  bucket        = "${local.resource_prefix.value}-data"
-  region        = "us-west-2"
-  acl           = "public-read"
-  #force_destroy = true
-  tags = {
-    Name        = "${local.resource_prefix.value}-data"
-    Environment = local.resource_prefix.value
-  }
+provider "aws" {
+  region = "us-east-1"
 }
 
-resource "aws_s3_bucket_object" "data_object" {
-  bucket = aws_s3_bucket.data.id
-  region        = "us-west-2"
-  key    = "customer-master.xlsx"
-  source = "resources/customer-master.xlsx"
-  tags = {
-    Name        = "${local.resource_prefix.value}-customer-master"
-    Environment = local.resource_prefix.value
-  }
+resource "aws_lambda_function" "example_lambda" {
+  function_name    = "example_lambda_function"
+  handler          = "index.handler"
+  runtime          = "provided.al2"
+  role             = aws_iam_role.lambda_exec.arn
+  timeout          = 15
+  memory_size      = 256
+  package_type     = "Image"
+  image_uri        = "node"
 }
 
-resource "aws_s3_bucket" "financials" {
-  # bucket is not encrypted
-  # bucket does not have access logs
-  # bucket does not have versioning
-  bucket        = "${local.resource_prefix.value}-financials"
-  region        = "us-west-2"
-  acl           = "public-read"
-  force_destroy = true
-  tags = {
-    Name        = "${local.resource_prefix.value}-financials"
-    Environment = local.resource_prefix.value
-  }
+resource "aws_iam_role" "lambda_exec" {
+  name = "example-lambda-exec"
 
-}
-
-resource "aws_s3_bucket" "operations" {
-  # bucket is not encrypted
-  # bucket does not have access logs
-  bucket = "${local.resource_prefix.value}-operations"
-  region        = "us-west-2"
-  acl    = "private"
-  versioning {
-    enabled = true
-  }
-  force_destroy = true
-  tags = {
-    Name        = "${local.resource_prefix.value}-operations"
-    Environment = local.resource_prefix.value
-  }
-
-}
-
-resource "aws_s3_bucket" "data_science" {
-  # bucket is not encrypted
-  bucket = "${local.resource_prefix.value}-data-science"
-  region        = "us-west-2"
-  acl    = "private"
-  versioning {
-    enabled = true
-  }
-  logging {
-    target_bucket = "${aws_s3_bucket.logs.id}"
-    target_prefix = "log/"
-  }
-  force_destroy = true
-}
-
-resource "aws_s3_bucket" "logs" {
-  bucket = "${local.resource_prefix.value}-logs"
-  region = "us-west-2"
-  acl    = "log-delivery-write"
-  versioning {
-    enabled = true
-  }
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm     = "aws:kms"
-        kms_master_key_id = "${aws_kms_key.logs_key.arn}"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "lambda.amazonaws.com"
+        }
       }
-    }
-  }
-  force_destroy = true
-  tags = {
-    Name        = "${local.resource_prefix.value}-logs"
-    Environment = local.resource_prefix.value
-  }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_exec_attachment" {
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  role       = aws_iam_role.lambda_exec.name
 }
