@@ -1,6 +1,6 @@
 resource "aws_security_group" "example" {
   name        = "example"
-  description = "Example security group for SSH access"
+  description = "Example security group for RDP access"
 
   ingress {
     from_port   = local.ssh_port
