@@ -56,6 +56,13 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
         - arn:aws:iam::aws:policy/AmazonEKSServicePolicy
+      Tags:
+        - Key: yor_trace
+          Value: cd0acf1d-0d4d-4cce-89d6-cd22f2a9e368
+        - Key: git_repo
+          Value: supplygoat
+        - Key: git_org
+          Value: try-panwiac
   VPC:
     Type: AWS::EC2::VPC
     Properties:
@@ -65,12 +72,24 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub '${AWS::StackName}-VPC'
+        - Key: yor_trace
+          Value: 20d8e2e7-cdc7-4e66-a680-4fafdd252b16
+        - Key: git_repo
+          Value: supplygoat
+        - Key: git_org
+          Value: try-panwiac
   InternetGateway:
     Type: "AWS::EC2::InternetGateway"
     Properties:
       Tags:
         - Key: Name
           Value: !Sub '${AWS::StackName}-Internet Gateway'
+        - Key: yor_trace
+          Value: a09ef949-63c6-4446-9382-2cda44a15a60
+        - Key: git_repo
+          Value: supplygoat
+        - Key: git_org
+          Value: try-panwiac
   VPCGatewayAttachment:
     Type: "AWS::EC2::VPCGatewayAttachment"
     Properties:
@@ -85,6 +104,12 @@ Resources:
           Value: Public Subnets
         - Key: Network
           Value: Public
+        - Key: yor_trace
+          Value: 5cd7690e-7697-4c41-924d-5cd224b80ef9
+        - Key: git_repo
+          Value: supplygoat
+        - Key: git_org
+          Value: try-panwiac
   PrivateRouteTable01:
     Type: AWS::EC2::RouteTable
     Properties:
@@ -94,6 +119,12 @@ Resources:
           Value: Private Subnet AZ1
         - Key: Network
           Value: Private01
+        - Key: git_org
+          Value: try-panwiac
+        - Key: yor_trace
+          Value: 37cda50e-16ca-4c74-a93f-d17249a24f98
+        - Key: git_repo
+          Value: supplygoat
   PrivateRouteTable02:
     Type: AWS::EC2::RouteTable
     Properties:
@@ -103,6 +134,12 @@ Resources:
           Value: Private Subnet AZ2
         - Key: Network
           Value: Private02
+        - Key: yor_trace
+          Value: c177c78c-5d7b-47bb-bdaf-9589fe830a67
+        - Key: git_repo
+          Value: supplygoat
+        - Key: git_org
+          Value: try-panwiac
   PublicRoute:
     DependsOn:
     - VPCGatewayAttachment
@@ -141,6 +178,12 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub '${AWS::StackName}-NatGatewayAZ1'
+        - Key: yor_trace
+          Value: 7e821585-4886-4fd5-9da5-84a748331338
+        - Key: git_repo
+          Value: supplygoat
+        - Key: git_org
+          Value: try-panwiac
   NatGateway02:
     DependsOn:
     - NatGatewayEIP2
@@ -153,18 +196,38 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub '${AWS::StackName}-NatGatewayAZ2'
+        - Key: yor_trace
+          Value: f648a9ec-01e3-4c2b-9052-7737b22852f3
+        - Key: git_repo
+          Value: supplygoat
+        - Key: git_org
+          Value: try-panwiac
   NatGatewayEIP1:
     DependsOn:
     - VPCGatewayAttachment
     Type: 'AWS::EC2::EIP'
     Properties:
       Domain: vpc
+      Tags:
+        - Key: yor_trace
+          Value: 60ad62ca-c2c6-4a65-8446-141b03643d6d
+        - Key: git_repo
+          Value: supplygoat
+        - Key: git_org
+          Value: try-panwiac
   NatGatewayEIP2:
     DependsOn:
     - VPCGatewayAttachment
     Type: 'AWS::EC2::EIP'
     Properties:
       Domain: vpc
+      Tags:
+        - Key: yor_trace
+          Value: 87ed9523-c08d-4f9f-9f2a-47724cac401c
+        - Key: git_repo
+          Value: supplygoat
+        - Key: git_org
+          Value: try-panwiac
   PublicSubnet01:
     Type: AWS::EC2::Subnet
     Metadata:
@@ -182,6 +245,12 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub "${AWS::StackName}-PublicSubnet01"
+        - Key: yor_trace
+          Value: e62931c8-c6fb-4a9c-a7b2-feccd896f4c9
+        - Key: git_repo
+          Value: supplygoat
+        - Key: git_org
+          Value: try-panwiac
   PublicSubnet02:
     Type: AWS::EC2::Subnet
     Metadata:
@@ -199,6 +268,12 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub "${AWS::StackName}-PublicSubnet02"
+        - Key: yor_trace
+          Value: a9ecd37e-3f85-4700-9a59-7c3f42a93d3a
+        - Key: git_repo
+          Value: supplygoat
+        - Key: git_org
+          Value: try-panwiac
   PrivateSubnet01:
     Type: AWS::EC2::Subnet
     Metadata:
@@ -218,6 +293,12 @@ Resources:
           Value: !Sub "${AWS::StackName}-PrivateSubnet01"
         - Key: "kubernetes.io/role/internal-elb"
           Value: "1"
+        - Key: yor_trace
+          Value: cc1c990f-a592-4263-bcc5-8c7cefcb81a6
+        - Key: git_repo
+          Value: supplygoat
+        - Key: git_org
+          Value: try-panwiac
   PrivateSubnet02:
     Type: AWS::EC2::Subnet
     Metadata:
@@ -237,6 +318,12 @@ Resources:
           Value: !Sub "${AWS::StackName}-PrivateSubnet02"
         - Key: "kubernetes.io/role/internal-elb"
           Value: "1"
+        - Key: yor_trace
+          Value: 4d2ee18f-fb6e-4f0c-ad31-93098bf00939
+        - Key: git_repo
+          Value: supplygoat
+        - Key: git_org
+          Value: try-panwiac
   PublicSubnet01RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
@@ -262,6 +349,13 @@ Resources:
     Properties:
       GroupDescription: Cluster communication with worker nodes
       VpcId: !Ref VPC
+      Tags:
+        - Key: yor_trace
+          Value: 7b1cc8c1-0742-403b-aaec-cd9f98bc36b2
+        - Key: git_repo
+          Value: supplygoat
+        - Key: git_org
+          Value: try-panwiac
   EKSCluster:
     Type: AWS::EKS::Cluster
     Properties:
