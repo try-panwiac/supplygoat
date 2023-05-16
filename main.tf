@@ -13,6 +13,18 @@ resource "aws_s3_bucket" "data" {
   }
 }
 
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "data" {
+  bucket = aws_s3_bucket.data.bucket
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm     = "aws:kms"
+    }
+  }
+}
+
+
 resource "aws_s3_bucket_object" "data_object" {
   bucket = aws_s3_bucket.data.id
   region        = "us-west-2"
@@ -39,6 +51,18 @@ resource "aws_s3_bucket" "financials" {
 
 }
 
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "financials" {
+  bucket = aws_s3_bucket.financials.bucket
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm     = "aws:kms"
+    }
+  }
+}
+
+
 resource "aws_s3_bucket" "operations" {
   # bucket is not encrypted
   # bucket does not have access logs
@@ -56,6 +80,18 @@ resource "aws_s3_bucket" "operations" {
 
 }
 
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "operations" {
+  bucket = aws_s3_bucket.operations.bucket
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm     = "aws:kms"
+    }
+  }
+}
+
+
 resource "aws_s3_bucket" "data_science" {
   # bucket is not encrypted
   bucket = "${local.resource_prefix.value}-data-science"
@@ -70,6 +106,18 @@ resource "aws_s3_bucket" "data_science" {
   }
   force_destroy = true
 }
+
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "data_science" {
+  bucket = aws_s3_bucket.data_science.bucket
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm     = "aws:kms"
+    }
+  }
+}
+
 
 resource "aws_s3_bucket" "logs" {
   bucket = "${local.resource_prefix.value}-logs"
