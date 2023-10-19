@@ -12,7 +12,7 @@ Django==3.2.8
 elasticsearch==7.15.1
 Flask==2.0.2
 kafka-python==2.0
-gevent==21.8.0
+gevent==23.9.0
 hug==2.6.1
 multidict==5.2.0
 pika==1.2.0
