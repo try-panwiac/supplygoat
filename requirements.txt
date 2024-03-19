@@ -10,7 +10,6 @@ celery==5.1.2
 contextvars==2.4
 Django==3.2.8
 elasticsearch==7.15.1
-Flask==2.0.2
 kafka-python==2.0
 gevent==21.8.0
 hug==2.6.1
