@@ -15,4 +15,9 @@ resource "aws_ecs_task_definition" "service" {
       ]
     }
   ])
+  tags = {
+    git_org   = "try-panwiac"
+    git_repo  = "supplygoat"
+    yor_trace = "d5363e3e-288c-4adc-8ded-3211a1196757"
+  }
 }
