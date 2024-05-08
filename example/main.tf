@@ -8,5 +8,10 @@ resource "aws_security_group" "example" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  tags = {
+    git_org   = "try-panwiac"
+    git_repo  = "supplygoat"
+    yor_trace = "6d55dc30-3dd2-4f09-a45a-06afa97edf28"
+  }
 }
 
