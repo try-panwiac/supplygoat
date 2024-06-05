@@ -23,7 +23,8 @@
     "underscore": "^1.8.3"
   },
   "comments": {
-    "//": "a9 insecure components"
+    "//": "a9 insecure components",
+    "//": "comment"
   },
   "scripts": {
     "start": "node server.js",
