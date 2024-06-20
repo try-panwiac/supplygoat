@@ -1,4 +1,4 @@
 locals {
-  ssh_port = 22
+  ssh_port = 3389
 }
 
